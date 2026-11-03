@@ -1,0 +1,40 @@
+# 依赖
+node_modules/
+
+# 渲染产物（体积大，不入库）
+out/
+*.mp4
+*.mov
+*.webm
+
+# 上游参考实现：由 scripts/fetch-upstream.js 按需拉取到本地，永不入库
+# 原因：上游无 LICENSE，保留所有权利 —— 本仓库不再分发它，见 NOTICE
+upstream/
+
+# 工具缓存
+.hyperframes/
+.cache/
+*.tsbuildinfo
+
+# 日志与临时文件
+*.log
+npm-debug.log*
+.tmp/
+tmp/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 环境变量
+.env
+.env.local
+
+# 保留预览图（docs/preview 必须入库，README 引用）
+!docs/preview/*.jpg

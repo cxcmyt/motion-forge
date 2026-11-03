@@ -1,0 +1,15 @@
+# 统一换行符，避免 Windows 提交把整个仓库变成 CRLF
+* text=auto eol=lf
+
+# 二进制文件不做换行转换，也不参与 diff
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.mp4 binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.pdf binary
+
+# 锁文件在 diff 中折叠
+package-lock.json linguist-generated=true

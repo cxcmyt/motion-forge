@@ -1,0 +1,44 @@
+{
+  "name": "motion-forge",
+  "display_name": "Motion Forge（动效工坊）",
+  "entry": "SKILL.md",
+  "version": "1.1.0",
+  "description": "用纯代码逐帧渲染生成卡点片头、字卡、VJ 循环与程序化科技片。两条管线（2D canvas 直出 raw RGBA；3D three.js + 无头 Chromium），已适配 Windows/macOS/Linux，字体与中文字形内置。",
+  "homepage": "https://github.com/cxcmyt/motion-forge",
+  "upstream": {
+    "author": "KRYPT-123",
+    "repo": "https://github.com/KRYPT-123/kiro-motion-studio",
+    "note": "不在本仓库内分发；由 scripts/fetch-upstream.js 按需拉取，上游保留所有权利"
+  },
+  "license": "MIT（原创层）· OFL-1.1（assets/fonts）· 见 NOTICE",
+  "tags": [
+    "motion-graphics",
+    "programmatic-video",
+    "ffmpeg",
+    "three.js",
+    "canvas",
+    "beat-sync",
+    "vj-loop",
+    "title-card"
+  ],
+  "requires": {
+    "node": ">=20",
+    "ffmpeg": ">=6",
+    "chromium": "Playwright 缓存或系统 Edge/Chrome（tools/chrome.js 自动定位）"
+  },
+  "runtime": {
+    "install": "npm install --omit=dev",
+    "verify": "node scripts/verify.js",
+    "optional": "node scripts/fetch-upstream.js（仅 3D 管线需要）"
+  },
+  "localized": {
+    "zh": {
+      "display_name": "Motion Forge（动效工坊）",
+      "summary": "纯代码逐帧渲染的动效视频引擎：卡点片头、字卡、VJ 循环、程序化科技片，无需 AE 与素材。"
+    },
+    "en": {
+      "display_name": "Motion Forge",
+      "summary": "Code-rendered motion graphics engine: beat-synced title cards, VJ loops and procedural tech visuals without an editor or stock footage."
+    }
+  }
+}

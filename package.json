@@ -1,0 +1,55 @@
+{
+  "name": "motion-forge",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Motion Forge（动效工坊）：用纯代码逐帧渲染生成卡点片头、字卡、VJ 循环与程序化科技片。两条管线（2D canvas 直出 raw RGBA；3D three.js + 无头 Chromium），跨平台可用。",
+  "license": "MIT",
+  "author": "motion-forge contributors",
+  "keywords": [
+    "motion-graphics",
+    "programmatic-video",
+    "ffmpeg",
+    "threejs",
+    "canvas",
+    "beat-sync",
+    "vj-loop",
+    "title-card",
+    "video-generation",
+    "ai-skill"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cxcmyt/motion-forge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cxcmyt/motion-forge/issues"
+  },
+  "homepage": "https://github.com/cxcmyt/motion-forge#readme",
+  "scripts": {
+    "verify": "node scripts/verify.js",
+    "fetch:upstream": "node scripts/fetch-upstream.js",
+    "render:samples": "node scripts/render-samples.js",
+    "render:all": "node scripts/render-samples.js --video",
+    "stills": "node upstream/examples/kiro-3d-logo/drive.js stills 1.0,5.0,12.0 out",
+    "bundle:3d": "esbuild upstream/examples/kiro-3d-logo/scene.js --bundle --format=iife --loader:.woff=binary --outfile=upstream/examples/kiro-3d-logo/bundle.js",
+    "bundle:vj1": "esbuild upstream/examples/kjstar-cosmic-vj/scene.js --bundle --format=iife --loader:.woff=binary --outfile=upstream/examples/kjstar-cosmic-vj/bundle.js",
+    "bundle:vj2": "esbuild upstream/examples/baifu-collage-vj/scene.js --bundle --format=iife --loader:.woff=binary --outfile=upstream/examples/baifu-collage-vj/bundle.js"
+  },
+  "dependencies": {
+    "@fontsource/major-mono-display": "^5.2.5",
+    "@fontsource/playfair-display": "^5.3.0",
+    "@fontsource/rock-salt": "^5.2.5",
+    "@fontsource/shrikhand": "^5.2.5",
+    "@fontsource/space-grotesk": "^5.2.5",
+    "@fontsource/space-mono": "^5.2.5",
+    "@fontsource/unbounded": "^5.2.5",
+    "@napi-rs/canvas": "^0.1.80",
+    "esbuild": "^0.25.0",
+    "opentype.js": "^1.3.4",
+    "playwright-core": "^1.56.0",
+    "three": "^0.169.0"
+  }
+}

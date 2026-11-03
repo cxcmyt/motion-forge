@@ -1,0 +1,111 @@
+# NOTICE
+
+**一句话：本仓库里没有一行第三方代码。** 全部内容按 MIT 授权，字体按 OFL-1.1，
+上游参考实现不在仓库内、也不随仓库分发。This repository ships no third-party
+code — everything here is MIT, fonts are OFL-1.1, and the upstream reference
+implementation is fetched locally by the user, never redistributed.
+
+---
+
+## 一、本仓库内容：MIT
+
+根目录 `LICENSE`（MIT）覆盖以下全部文件：
+
+| 路径 | 内容 |
+|---|---|
+| `SKILL.md` | 技能入口 |
+| `manifest.json` | 技能元数据 |
+| `examples/opener.js` | 12 秒卡点片头模板 |
+| `examples/signal20.js` | 20 秒程序化科技片 |
+| `tools/chrome.js` | 跨平台 Chromium 定位器 |
+| `scripts/verify.js` | 环境自检 |
+| `scripts/render-samples.js` | 批量出样片 |
+| `scripts/fetch-upstream.js` | 上游拉取器（纯原创逻辑） |
+| `references/methodology.md` | 方法论整理 |
+| `references/local-port.md` | 移植记录与踩坑 |
+| `README.md`、`README.en.md`、`CHANGELOG.md`、`CONTRIBUTING.md` | 项目文档 |
+
+可自由使用、修改、商用、再分发，保留版权声明即可。
+
+---
+
+## 二、字体：SIL Open Font License 1.1
+
+`assets/fonts/` 下 6 个 WOFF 来自 `@fontsource/*` 分发包，各自遵循 OFL-1.1，
+版权归各字体作者：
+
+| 文件 | 字体 |
+|---|---|
+| `unbounded-latin-400-normal.woff` | Unbounded |
+| `space-mono-latin-400-normal.woff` | Space Mono |
+| `space-grotesk-latin-400-normal.woff` | Space Grotesk |
+| `major-mono-display-latin-400-normal.woff` | Major Mono Display |
+| `rock-salt-latin-400-normal.woff` | Rock Salt |
+| `shrikhand-latin-400-normal.woff` | Shrikhand |
+
+OFL 允许使用、嵌入与商用；再分发时保留版权与许可声明，且不得单独售卖字体文件本身。
+
+---
+
+## 三、上游参考实现：不在本仓库内
+
+本项目的思路与参数大量来自 **KRYPT-123 / kiro-motion-studio**：
+
+- 作者：**KRYPT-123**
+- 仓库：https://github.com/KRYPT-123/kiro-motion-studio
+- 快照提交：`4f9ec427c3dcd8fa428ef3064a3f0871dcb41899`（2026-10-30T11:28:58Z，单次提交）
+- 许可状态：**仓库未附带 LICENSE 文件**。按伯尔尼公约与 GitHub 服务条款，无许可证即
+  默认「保留所有权利」（All rights reserved）。
+
+### 处理方式
+
+`upstream/` 目录**已被 `.gitignore` 排除，仓库中不存在**。需要 3D 管线或上游那几个
+作品脚本时，由使用者在本机执行：
+
+```bash
+node scripts/fetch-upstream.js        # 从原作者仓库克隆到 ./upstream/
+```
+
+这意味着：
+
+1. 你拿到的上游代码直接来自原作者，适用原作者的条件，与本项目的 MIT **无关**。
+2. 本项目不对上游代码主张任何权利，也不为其提供任何许可。
+3. 上游代码不会通过本仓库流入任何人的机器 —— 谁需要，谁自己拉。
+
+### 拉取时应用的最小补丁
+
+上游有 4 个脚本把 Chromium 路径写死成作者自己的 Linux 沙箱路径
+（`/opt/pw-browsers/chromium-1243/chrome-linux64/chrome`），不改则在你机器上必然崩溃。
+`fetch-upstream.js` 会在**你的机器上现场**把该字符串替换成 `require('../tools/chrome.js').path`，
+并补齐 `fonts/` 目录。补丁只有这一处替换，逻辑在本仓库（MIT）里，上游副本不随仓库分发。
+替换细节见 `references/local-port.md`。
+
+### 原作者如提出异议
+
+本项目尊重原作者意愿。若 KRYPT-123 要求，只需从 `scripts/fetch-upstream.js` 中删除
+仓库地址（一个常量），项目其余部分完全不受影响 —— 2D 管线与两个模板从不依赖上游。
+联系方式见仓库 Issues。
+
+---
+
+## 四、方法论归属
+
+`references/methodology.md` 是与上游 SKILL.md 内容不同的**重新整理**：把原文的散文
+重排为参数表、转场配方与坑清单，并补充了本机移植中实测得到的结论。这份文档的著作权
+归本项目（MIT），其中的方法论思想源自 KRYPT-123，在此致谢。
+
+---
+
+## 五、本项目对上游的改动摘要
+
+为让上游脚本能在 Linux 沙箱之外运行，`fetch-upstream.js` 在拉取时做两件事，事实层面
+透明披露如下：
+
+| 对象 | 改动 | 何时发生 |
+|---|---|---|
+| 4 个含 `executablePath` 的脚本 | 硬编码路径 → `require(...tools/chrome.js).path` | 拉取时，在你本机 |
+| `upstream/fonts/`、`upstream/examples/fonts/` | 从 `assets/fonts/` 复制 6 个 OFL 字体 | 拉取时，在你本机 |
+| 其余上游文件 | **逐字节保持原样** | — |
+
+由于这些改动只发生在使用者本机，且改动范围以最小必要为限，本项目不因此对上游主张
+任何权利，也不构成对上游的再分发。
